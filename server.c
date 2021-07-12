@@ -10,7 +10,7 @@ int	power_of_two(int n)
 		res*=2;
 		n--;
 	}
-	printf("return -> %d\n", res);
+	// printf("return -> %d\n", res);
 	return (res);
 }
 
@@ -19,7 +19,7 @@ void	print_char(char *str)
 	int		res;
 	char	c;
 
-	printf("str %s\n", str);                     // STRLEN
+	// printf("str %s\n", str);                     // STRLEN
 	res = ((str[0] - '0') * power_of_two(6))
 	+ ((str[1] - '0') * power_of_two(5))
 	+ ((str[2] - '0') * power_of_two(4))
@@ -28,24 +28,23 @@ void	print_char(char *str)
 	+ ((str[5] - '0') * power_of_two(1))
 	+ ((str[6] - '0') * power_of_two(0));
 	c = res;
-	printf("-> %c %d\n", c, res);
-	// write(1, &c, 1);
+	// printf("-> %c %d\n\n", c, res);
+	write(1, &c, 1);
 }
 
 void	handler_server(int n)
 {
-	static char	num[8];
+	static char	num[7];
 	static int	i = 0;
 
-	printf("%d\n", n);
-	if (n == 30)
+	// printf("%d %d\n", n, i);
+	if (n == 10) // 30
 		num[i] = '0';
-	else if (n == 31)
+	else if (n == 12)  // 31
 		num[i] = '1';
 	i++;
 	if (i == 7)
 	{
-		num[7] = '\0';
 		i = 0;
 		print_char(num);
 	}

@@ -1,53 +1,56 @@
 #include "minitalk_header.h"
 
-void	send_char(char c, int pid)
-{
-	char	str[7];
-	int		i;
-	int		ch;
-
-	i = 0;
-	ch = c;
-	// printf("here send %d %c %d\n", ch, c, c);
-	while (i < 7)
-	{
-		// printf("%d\n", i);
-		str[i] = (ch % 2) + '0';
-		ch = ch / 2;
-		i++;
-	}
-	// str[i] = '\0';
-	// printf("str %s\n", str);
-	// i = ft_strlen(str);
-	// i = 8;
-	i--;
-	printf("rev ");
-	while (i > -1)
-	{
-		printf("%c", str[i]);
-		if (str[i] == '0')
-			kill(pid, SIGUSR1);
-		else if (str[i] == '1')
-			kill(pid, SIGUSR2);
-		// printf("%c", str[i]);
-		usleep(100);
-		i--;
-	}
-	printf("\n\n");
-}
-
 void	handler_message(char *str, int pid)
 {
 	int	i;
+	int n;
+	// struct siginfo_t	si_return;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		// printf("%c\n", str[i]);
-		send_char(str[i], pid);
+		n = 0;
+		while (n < 8)
+		{
+			if ((str[i] >> n) & 1)
+			{
+				if (kill(pid, SIGUSR2) == -1)
+				{
+					write(1, "CANNOT SEND SIGNAL\n", 20);
+					return ;
+				}
+				printf("12 ");
+			}
+			else
+			{
+				if (kill(pid, SIGUSR1) == -1)
+				{
+					write(1, "CANNOT SEND SIGNAL\n", 20);
+					return ;
+				}
+				printf("10 ");
+			}		
+			n++;
+			// printf("", si_pid);
+			usleep(1000);
+		}
+		printf("\n%c %d", str[i], str[i]);
+		// printf("   %c\n", str[i]);
+		// send_char(str[i - 1], pid);
 		i++;
+		printf("\n");
 	}
-	send_char('\n', pid);
+	printf("n - > %d\n", n);
+	// while (n > 0)
+	// {
+	// 	if (kill(pid, SIGUSR1) == -1)
+	// 	{
+	// 		write(1, "CANNOT SEND SIGNAL\n", 20);
+	// 		return ;
+	// 	}
+	// 	n--;
+	// 	usleep(500);
+	// }
 }
 
 int	main(int argc, char **argv)

@@ -1,52 +1,28 @@
 #include "minitalk_header.h"
 
-int	power_of_two(int n)
-{
-	int	res;
-
-	res = 1;
-	while (n > 0)
-	{
-		res*=2;
-		n--;
-	}
-	// printf("return -> %d\n", res);
-	return (res);
-}
-
-void	print_char(char *str)
-{
-	int		res;
-	char	c;
-
-	// printf("str %s\n", str);                     // STRLEN
-	res = ((str[0] - '0') * power_of_two(6))
-	+ ((str[1] - '0') * power_of_two(5))
-	+ ((str[2] - '0') * power_of_two(4))
-	+ ((str[3] - '0') * power_of_two(3))
-	+ ((str[4] - '0') * power_of_two(2))
-	+ ((str[5] - '0') * power_of_two(1))
-	+ ((str[6] - '0') * power_of_two(0));
-	c = res;
-	// printf("-> %c %d\n\n", c, res);
-	write(1, &c, 1);
-}
-
 void	handler_server(int n)
 {
-	static char	num[7];
+	static char	num;
 	static int	i = 0;
 
-	// printf("%d %d\n", n, i);
+	// printf("%d %d ", n, i);
 	if (n == 10) // 30
-		num[i] = '0';
-	else if (n == 12)  // 31
-		num[i] = '1';
+	{
+		num = num & ~(1 << i);
+		// printf("0\n");
+	}
+	else if (n == 12)
+	{
+		num = num | (1 << i);
+		// printf("1\n");
+	}
 	i++;
-	if (i == 7)
+	if (i == 8)
 	{
 		i = 0;
-		print_char(num);
+		// print_char(num);
+		// printf("%d\n", num);
+		write(1, &num, 1);
 	}
 }
 

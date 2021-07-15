@@ -8,9 +8,9 @@ CLIENT	=	client
 
 SERVER	=	server
 
-SRC1	=	client.c utils1.c utils2.c
+SRC1	=	client.c client_utils.c
 
-SRC2	=	server.c utils1.c utils2.c
+SRC2	=	server.c server_utils.c
 
 OBJECTS1=	$(SRC1:.c=.o)
 

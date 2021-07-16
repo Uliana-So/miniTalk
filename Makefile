@@ -24,7 +24,7 @@ $(CLIENT): 	$(OBJECTS1) $(SERVER) $(HEADER)
 			@echo "\033[33m     ▂▃▅▇█▓▒░ CLIENT DONE ░▒▓█▇▅▃▂\033[0m"
 			@echo ""
 
-$(SERVER): 	$(OBJECTS2)
+$(SERVER): 	$(OBJECTS2) $(HEADER)
 			@$(CC) $(CFLAGS) $(OBJECTS2) -I $(HEADER) -o $(SERVER)
 			@echo ""
 			@echo "\033[33m     ▂▃▅▇█▓▒░ SERVER DONE ░▒▓█▇▅▃▂\033[0m"

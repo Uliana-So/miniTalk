@@ -16,9 +16,9 @@ OBJECTS1=	$(SRC1:.c=.o)
 
 OBJECTS2=	$(SRC2:.c=.o)
 
-all:		$(CLIENT) $(HEADER)
+all:		$(CLIENT) $(SERVER)
 
-$(CLIENT): 	$(OBJECTS1) $(SERVER) $(HEADER)
+$(CLIENT): 	$(OBJECTS1) $(HEADER)
 			@$(CC) $(CFLAGS) $(OBJECTS1) -I $(HEADER) -o $(CLIENT)
 			@echo ""
 			@echo "\033[33m     ▂▃▅▇█▓▒░ CLIENT DONE ░▒▓█▇▅▃▂\033[0m"
@@ -32,7 +32,7 @@ $(SERVER): 	$(OBJECTS2) $(HEADER)
 
 %.o:		%.c
 			@$(CC) $(CFLAGS) -I $(HEADER) -c $^ -o $@
-			@echo "\033[35m        Compiling...  $<\033[0m"
+			@echo "\033[35m       Compiling...  $<\033[0m"
 
 clean:
 			@rm -f $(OBJECTS1) $(OBJECTS2)

@@ -5,9 +5,9 @@ void	handler_server(int n)
 	static char	num;
 	static int	i = 0;
 
-	if (n == 30)
+	if (n == SIGUSR1)
 		num = num & ~(1 << i);
-	else if (n == 31)
+	else if (n == SIGUSR2)
 		num = num | (1 << i);
 	i++;
 	if (i == 8)

@@ -1,4 +1,4 @@
-#miniTalk (for macOS)
+miniTalk (for macOS)
 
 The server must be launched first, and after being launched it must display its PID.
 

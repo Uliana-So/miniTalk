@@ -14,10 +14,17 @@
 * You can only use the two signals SIGUSR1 and SIGUSR2
 
 ## Compiling
-> ` make `
+```
+make
+```
+
 ## Start project
 At first
-> ` ./server `
+```
+./server
+```
 
 After that in another terminal
-> ` ./client PID "ky-ky" `
+```
+./client PID "ky-ky"
+```
